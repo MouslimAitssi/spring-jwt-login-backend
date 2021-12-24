@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.logging.Logger;
 
 
-@RestController
+@Controller
 public class LoginController {
 
     @Autowired
@@ -46,7 +47,7 @@ public class LoginController {
             User user = (User) authenticate.getPrincipal();
             Logger.getAnonymousLogger().info(user.toString());
             return new ResponseEntity(
-                            new LoginResponse(jwtProvider.generateJWT(user.getUsername(), secret, 900)),
+                            new LoginResponse(jwtProvider.generateJWT(user.getUsername(), secret, 90000000)),
                             HttpStatus.CREATED
                     );
 

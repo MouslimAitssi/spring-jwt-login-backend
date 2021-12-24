@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.logging.Logger;
 
 
 @RestController
 @RequestMapping("users")
 public class UserController {
-
-    @Value("${secret}")
-    private String secret;
 
     @Autowired
     private UserDao userDao;
@@ -25,6 +24,14 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userDao.save(user);
+    }
+
+    @GetMapping("/get")
+    public List<User> getUsers() {
+        Logger.getAnonymousLogger().info("get users");
+        List<User> users = userDao.findAll();
+        Logger.getAnonymousLogger().info(String.valueOf(users));
+        return users;
     }
 
     /*@GetMapping("/{username}")
@@ -46,6 +53,5 @@ public class UserController {
         userDao.save(user);
         return user;
     }*/
-
 
 }
