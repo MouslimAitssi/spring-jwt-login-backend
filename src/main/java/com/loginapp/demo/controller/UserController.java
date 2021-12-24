@@ -3,11 +3,9 @@ package com.loginapp.demo.controller;
 import com.loginapp.demo.dao.UserDao;
 import com.loginapp.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @RestController
@@ -28,17 +26,15 @@ public class UserController {
 
     @GetMapping("/get")
     public List<User> getUsers() {
-        Logger.getAnonymousLogger().info("get users");
         List<User> users = userDao.findAll();
-        Logger.getAnonymousLogger().info(String.valueOf(users));
         return users;
     }
 
-    /*@GetMapping("/{username}")
+    @GetMapping("/{username}")
     public User getUserByUsername(@PathVariable String username) {
         User user = userDao.findByUsername(username);
         return user;
-    }*/
+    }
 
     @PutMapping("/update")
     public User updateUser(@RequestBody User user) {
