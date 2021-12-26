@@ -38,16 +38,9 @@ public class UserController {
 
     @PutMapping("/update")
     public User updateUser(@RequestBody User user) {
+        //User result = userDao.findByUsername(user.getUsername());
         userDao.save(user);
         return user;
     }
-
-    /*@PutMapping("/update/{username}")
-    public User updateUserByUsername(@PathVariable String oldUsername) {
-        User user = userDao.findByUsername(oldUsername);
-        user.setUsername("mouslim");
-        userDao.save(user);
-        return user;
-    }*/
 
 }
